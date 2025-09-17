@@ -1,9 +1,11 @@
 package com.nura.cinema_booking.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.nura.cinema_booking.enums.ReservationStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     @ManyToOne
@@ -37,6 +40,7 @@ public class Reservation {
     @Column(nullable = false)
     private boolean paid = false;
 
-    @Column(name = "total_price", nullable = false)
-    private Double totalPrice;
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal totalPrice;
+
 }
