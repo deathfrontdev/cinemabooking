@@ -10,12 +10,10 @@ import org.mapstruct.MappingTarget;
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
 
-    // Review → DTO
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "movie.id", target = "movieId")
     ReviewResponseDTO toDTO(Review review);
 
-    // DTO → Review (create new review)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", ignore = true)   // будем сетить в сервисе
     @Mapping(target = "movie", ignore = true)  // будем сетить в сервисе
@@ -25,7 +23,6 @@ public interface ReviewMapper {
     @Mapping(target = "downvotes", ignore = true)
     Review toEntity(ReviewRequestDTO request);
 
-    // обновление существующего Review
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "movie", ignore = true)
